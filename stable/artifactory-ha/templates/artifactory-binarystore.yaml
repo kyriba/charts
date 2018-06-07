@@ -137,8 +137,8 @@ data:
         <provider id="s3" type="s3">
             <endpoint>http://s3.amazonaws.com</endpoint>
             <refreshCredentials>true</refreshCredentials>
-            <testConnection>false</testConnection>
-            <httpsOnly>false</httpsOnly>
+            <testConnection>true</testConnection>
+            <httpsOnly>true</httpsOnly>
             <region>{{ .Values.artifactory.persistence.awsS3.region }}</region>
             <bucketName>{{ .Values.artifactory.persistence.awsS3.bucketName }}</bucketName>
             <identity>{{ .Values.artifactory.persistence.awsS3.identity }}</identity>
