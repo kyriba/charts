@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{- $fileName := .Values.config.serviceAccountJson -}}
 apiVersion: v1
 kind: ConfigMap

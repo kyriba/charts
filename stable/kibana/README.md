@@ -43,6 +43,8 @@ Parameter | Description | Default
 `image.pullPolicy` | Image pull policy | `IfNotPresent`
 `image.repository` | Image repository | `kibana`
 `image.tag` | Image tag | `6.0.0`
+`image.pullSecrets` |Specify image pull secrets | `nil`
+`commandline.args` | add additional commandline args | `nil`
 `ingress.enabled` | Enables Ingress | `false`
 `ingress.annotations` | Ingress annotations | None:
 `ingress.hosts` | Ingress accepted hostnames | None:
@@ -50,10 +52,12 @@ Parameter | Description | Default
 `nodeSelector` | node labels for pod assignment | `{}`
 `podAnnotations` | annotations to add to each pod | `{}`
 `replicaCount` | desired number of pods | `1`
+`serviceAccountName` | serviceAccount that will run the pod | `nil`
 `resources` | pod resource requests & limits | `{}`
 `service.externalPort` | external port for the service | `443`
 `service.internalPort` | internal port for the service | `4180`
 `service.externalIPs` | external IP addresses | None:
+`service.loadBalancerIP` | Load Balancer IP address (to use with service.type LoadBalancer) | None:
 `service.type` | type of service | `ClusterIP`
 `service.annotations` | Kubernetes service annotations | None:
 `tolerations` | List of node taints to tolerate | `[]`
