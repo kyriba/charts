@@ -137,6 +137,15 @@ volumeMounts:
     mountPath: /usr/share/logstash/patterns
   - name: pipeline
     mountPath: /usr/share/logstash/pipeline
+  - name: certs
+    mountPath: /usr/share/logstash/certs
+  - name: root-ca
+    mountPath: /usr/share/logstash/root-ca
+
+  # certs:
+    # enabled: false
+    # secretName: secretName1
+    # rootCaSecret: secretName2
 
 exporter:
   logstash:
