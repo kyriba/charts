@@ -125,6 +125,14 @@ spec:
         - name: pipeline
           configMap:
             name: {{ template "logstash.fullname" . }}-pipeline
+      {{- if .Values.certs.enabled }}
+        - name: certs
+          secret:
+            secretName: {{ .Values.certs.secretName }}
+        - name: root-ca
+          secret:
+            secretName: {{ .Values.certs.rootCaSecret }}
+      {{- end }}
 
   volumeClaimTemplates:
     - metadata:
