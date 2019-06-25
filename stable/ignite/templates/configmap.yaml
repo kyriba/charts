@@ -36,6 +36,13 @@ data:
         <bean class="org.apache.ignite.configuration.IgniteConfiguration">
 
             <property name="peerClassLoadingEnabled" value="{{ .Values.peerClassLoadingEnabled | default false }}"/>
+       
+            <property name="marshaller">
+              <bean class="org.apache.ignite.internal.marshaller.optimized.OptimizedMarshaller">
+                <!-- Set to false to allow non-serializable objects in examples, default is true. -->
+                <property name="requireSerializable" value="true"/>
+              </bean>
+            </property>
 
 {{- if (.Values.persistence.enabled) }}
             <!-- Enabling Apache Ignite Persistent Store. -->
@@ -79,6 +86,7 @@ data:
                         <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
                             <property name="namespace" value="{{ .Release.Namespace }}"/>
                             <property name="serviceName" value="{{ include "ignite.fullname" . }}"/>
+                            <property name="masterUrl" value="https://172.31.4.137:6443"/>
                         </bean>
                     </property>
                 </bean>

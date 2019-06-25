@@ -19,6 +19,7 @@ spec:
         app: {{ include "ignite.fullname" . }}
     spec:
       serviceAccountName: {{ include "ignite.serviceAccountName" . }}
+      hostNetwork: true
       volumes:
         - name: config-volume
           configMap:
@@ -44,7 +45,7 @@ spec:
         - containerPort: 47500 # discovery SPI port number.
         - containerPort: 49112 # JMX port number.
         - containerPort: 10800 # SQL port number.
-        - containerPort: 8080 # REST port number.
+        - containerPort: 8888 # REST port number.
         - containerPort: 10900 #Thin clients port number.
         volumeMounts:
 {{- if (.Values.persistence.enabled) }}

@@ -22,8 +22,8 @@ spec:
       port: 10800
       targetPort: 10800
     - name: rest
-      port: 8080
-      targetPort: 8080
+      port: 8888
+      targetPort: 8888
     - name: thin-clients
       port: 10900
       targetPort: 10900
