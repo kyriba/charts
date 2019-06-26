@@ -48,6 +48,41 @@ data:
                 <property name="requireSerializable" value="true"/>
               </bean>
             </property>
+    
+     <property name="cacheConfiguration">
+        <list>
+          <bean class="org.apache.ignite.configuration.CacheConfiguration">
+              <property name="name" value="user_session"/>
+              <property name="cacheMode" value="PARTITIONED"/>
+              <property name="readFromBackup" value="true"/>
+              <property name="backups" value="1"/>
+              <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+          </bean>
+          <bean class="org.apache.ignite.configuration.CacheConfiguration">
+              <property name="name" value="user_session_data"/>
+              <property name="cacheMode" value="PARTITIONED"/>
+              <property name="readFromBackup" value="true"/>
+              <property name="backups" value="1"/>
+              <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+          </bean>
+          <bean class="org.apache.ignite.configuration.CacheConfiguration">
+              <property name="name" value="user_session_channel"/>
+              <property name="cacheMode" value="PARTITIONED"/>
+              <property name="readFromBackup" value="true"/>
+              <property name="backups" value="1"/>
+              <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+          </bean>
+          <bean class="org.apache.ignite.configuration.CacheConfiguration">
+              <property name="name" value="shared_resource"/>
+              <property name="cacheMode" value="PARTITIONED"/>
+              <property name="readFromBackup" value="true"/>
+              <property name="backups" value="1"/>
+              <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+          </bean>
+        </list>
+    </property>
+ 
+    <property name="segmentationPolicy" value="NOOP"/>
 
 {{- if (.Values.persistence.enabled) }}
             <!-- Enabling Apache Ignite Persistent Store. -->
