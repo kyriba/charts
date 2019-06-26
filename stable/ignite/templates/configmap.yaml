@@ -33,6 +33,11 @@ data:
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+        <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+          <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+          <property name="searchSystemEnvironment" value="true" />
+        </bean> 
+
         <bean class="org.apache.ignite.configuration.IgniteConfiguration">
 
             <property name="peerClassLoadingEnabled" value="{{ .Values.peerClassLoadingEnabled | default false }}"/>
@@ -79,6 +84,7 @@ data:
             <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
             <property name="discoverySpi">
                 <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+                    <property name="localAddress" value="${IGNITE_POD_IP}"/>
                     <property name="ipFinder">
                         <!--
                             Enables Kubernetes IP finder and setting custom namespace and service names.
@@ -86,10 +92,16 @@ data:
                         <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
                             <property name="namespace" value="{{ .Release.Namespace }}"/>
                             <property name="serviceName" value="{{ include "ignite.fullname" . }}"/>
-                            <property name="masterUrl" value="https://172.31.4.137:6443"/>
+                            <property name="masterUrl" value="https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}"/>
                         </bean>
                     </property>
                 </bean>
+            </property>
+            
+            <property name="communicationSpi">
+              <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
+                <property name="localAddress" value="${IGNITE_POD_IP}"/>
+              </bean>
             </property>
         </bean>
     </beans>

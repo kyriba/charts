@@ -34,6 +34,10 @@ spec:
 {{ toYaml .Values.resources | indent 10 }}
 {{- if .Values.env }}
         env:
+        - name: IGNITE_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
 {{- range $name, $value := .Values.env }}
         - name: "{{ $name }}"
           value: "{{ $value }}"
