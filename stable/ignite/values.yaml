@@ -9,6 +9,8 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+bindHostNetwork: false
+
 rbac:
   create: true
 

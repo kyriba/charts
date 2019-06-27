@@ -24,6 +24,9 @@ spec:
     - name: rest
       port: 8888
       targetPort: 8888
+    - name: jmx-export
+      port: 8090
+      targetPort: 8090
     - name: thin-clients
       port: 10900
       targetPort: 10900

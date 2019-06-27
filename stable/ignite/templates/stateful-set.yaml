@@ -19,7 +19,7 @@ spec:
         app: {{ include "ignite.fullname" . }}
     spec:
       serviceAccountName: {{ include "ignite.serviceAccountName" . }}
-      hostNetwork: true
+      hostNetwork: {{ .Values.bindHostNetwork }}
       volumes:
         - name: config-volume
           configMap:
@@ -27,6 +27,9 @@ spec:
             items:
             - key: ignite-config.xml
               path: default-config.xml
+        - name: config-jmx-volume
+          configMap:
+            name: {{ include "ignite.fullname" . }}-configmap-jmx
       containers:
       - name: ignite
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -60,6 +63,8 @@ spec:
 {{- end }}
         - name: config-volume
           mountPath: /opt/ignite/apache-ignite-fabric/config
+        - name: config-jmx-volume
+          mountPath: /opt/ignite/apache-ignite-jmx
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
