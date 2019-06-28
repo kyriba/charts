@@ -9,3 +9,14 @@ data:
     ssl: false
     lowercaseOutputName: false
     lowercaseOutputLabelNames: false
+    whitelistObjectNames:
+    # - "java.lang_*"
+    # - "org.apache:*"
+    - "org.apache:group=Kernal,*"
+    - "org.apache:group=DataRegionMetrics,*"
+    rules:
+    - pattern: "org.apache<clsLdr=(.+), group=(.+), name=(.+)><>(.+):"
+      name: "ignite_$3_$4"
+      labels:
+        group: "$2"
+        bean: "$3"
