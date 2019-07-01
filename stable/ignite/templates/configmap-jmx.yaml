@@ -14,7 +14,17 @@ data:
     # - "org.apache:*"
     - "org.apache:group=Kernal,*"
     - "org.apache:group=DataRegionMetrics,*"
+    - "org.apache:name=\"org.apache.ignite.internal.processors.cache.CacheClusterMetricsMXBeanImpl\",*"
+    - "org.apache:name=\"org.apache.ignite.internal.processors.cache.CacheLocalMetricsMXBeanImpl\",*"
     rules:
+    - pattern: "org.apache<clsLdr=(.+), group=(.+), name=\"org.apache.ignite.internal.processors.cache.Cache(Local|Cluster)MetricsMXBeanImpl\"><>(.+):"
+    #- pattern: "org.apache<clsLdr=(.+), group=(.+), name=\"org.apache.ignite.internal.processors.cache.CacheClusterMetricsMXBeanImpl\"><>(.+):"
+      name: "ignite_cache$3_$2_$4"
+      #name: "ignite_cache_$2_$3"
+      labels:
+        group: "$2"
+        #bean: "CacheClusterMetricsMXBeanImpl"
+        bean: "Cache$3MetricsMXBeanImpl"
     - pattern: "org.apache<clsLdr=(.+), group=(.+), name=(.+)><>(.+):"
       name: "ignite_$3_$4"
       labels:
